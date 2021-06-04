@@ -2,12 +2,12 @@
 # improved by @Lostb053
 # further improvement by @Kakashi_HTK/@ashwinstr
 
-from json import dumps
 
 from google_trans_new import google_translator
 from googletrans import LANGUAGES
 
 from userge import Message, userge
+from userge.plugins.sharingan.langs import sort_lang
 from userge.plugins.utils.translate import _translate_this
 
 translator = google_translator()
@@ -17,7 +17,7 @@ translator = google_translator()
     "rom",
     about={
         "header": "Romaji transcriber",
-        "supported languages": dumps(LANGUAGES, indent=4, sort_keys=True),
+        "supported languages": sort_lang(LANGUAGES),
         "flags": {"-s": "transcribe silently"},
         "usage": "{tr}rom [-s (optional)] [src lang] [dest lang] [reply to message or text]",
         "examples": "for other language to latin\n"
