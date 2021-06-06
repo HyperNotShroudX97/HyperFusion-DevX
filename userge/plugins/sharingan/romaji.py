@@ -7,7 +7,7 @@ from google_trans_new import google_translator
 from googletrans import LANGUAGES
 
 from userge import Message, userge
-from userge.plugins.sharingan.langs import sort_lang
+from userge.helpers.langs import sort_lang
 from userge.plugins.utils.translate import _translate_this
 
 translator = google_translator()
@@ -109,6 +109,9 @@ async def romaji_(message: Message):
         await message.edit("Error in transcribing, check <code>{tr}help rom</code>...")
         return
     result = result[1]
+    if result is None:
+        await message.edit("Couldn't transcribe, sorry...", del_in=5)
+        return
     if not secret:
         out += (
             f"Original text from <b>{lang_src}</b>:\n"
