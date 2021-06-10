@@ -2,6 +2,7 @@
 # improved by @Lostb053
 # further improvement by @Kakashi_HTK/@ashwinstr
 
+
 from json import dumps
 
 from google_trans_new import google_translator
@@ -17,7 +18,7 @@ translator = google_translator()
     "rom",
     about={
         "header": "Romaji transcriber",
-        "supported languages": dumps(LANGUAGES, indent=4, sort_keys=True),
+        "supported languages": dumps(LANGUAGES, indent=4),
         "flags": {"-s": "transcribe silently"},
         "usage": "{tr}rom [-s (optional)] [src lang] [dest lang] [reply to message or text]",
         "examples": "for other language to latin\n"
@@ -109,6 +110,9 @@ async def romaji_(message: Message):
         await message.edit("Error in transcribing, check <code>{tr}help rom</code>...")
         return
     result = result[1]
+    if result is None:
+        await message.edit("Couldn't transcribe, sorry...", del_in=5)
+        return
     if not secret:
         out += (
             f"Original text from <b>{lang_src}</b>:\n"

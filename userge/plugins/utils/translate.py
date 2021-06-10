@@ -19,7 +19,7 @@ from userge.utils.functions import get_emoji_regex
     "tr",
     about={
         "header": "Translate the given text using Google Translate",
-        "supported languages": dumps(LANGUAGES, indent=4, sort_keys=True),
+        "supported languages": dumps(LANGUAGES, indent=4),
         "usage": "from english to sinhala\n"
         "{tr}tr -en -si i am userge\n\n"
         "from auto detected language to sinhala\n"
