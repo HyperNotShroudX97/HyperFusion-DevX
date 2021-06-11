@@ -235,7 +235,7 @@ async def fban_p(message: Message):
         return
     PROOF_CHANNEL = FBAN_LOG_CHANNEL if FBAN_LOG_CHANNEL else Config.LOG_CHANNEL_ID
     user = message.reply_to_message.from_user.id
-    input = message.input_str
+    input = message.filtered_input_str
     reason = input
     if (
         user in Config.SUDO_USERS
@@ -285,7 +285,11 @@ async def fban_p(message: Message):
     )
     reason = reason or "Not specified"
     if FBAN_LOG_CHANNEL:
-        reason += " || {" + log_fwd.message_id + "}"
+        reason += (
+            " || {"
+            + f"https://t.me/{int(FBAN_LOG_CHANNEL)}/{int(log_fwd.message_id)}"
+            + "}"
+        )
     async for data in FED_LIST.find():
         total += 1
         chat_id = int(data["chat_id"])
