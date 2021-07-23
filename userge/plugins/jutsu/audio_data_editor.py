@@ -22,16 +22,17 @@ from userge import Message, userge
 async def album_edt(message: Message):
     """Audio name editor"""
     reply_ = message.reply_to_message
-    if not reply_ or not reply.audio:
+    if not reply_ or not reply_.audio:
         await message.edit("Reply to an audio file...")
         return
     chat_ = message.chat.id
     file_ = await userge.download_media(reply_)
     flag = message.flags
-    input_ = message.filtered_input_str
+    input_ = str(message.filtered_input_str)
     flag_list = list(flag)
     sort_flag = flag_list.sort()
     split_input_ = input_.split(";")
+    await message.edit(split_input_)
     if len(split_input_) > 2 or len(sort_flag) > 2:
         await message.err("Don't enter more then two '<b>;</b>' or flags...", del_in=5)
         return

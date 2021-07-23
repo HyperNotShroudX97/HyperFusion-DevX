@@ -235,6 +235,18 @@ async def fban_p(message: Message):
         await message.err("Please reply to proof...", del_in=7)
         return
     PROOF_CHANNEL = FBAN_LOG_CHANNEL if FBAN_LOG_CHANNEL else Config.LOG_CHANNEL_ID
+    if ("-r" or "-s") in message.flags:
+        if not FBAN_LOG_CHANNEL:
+            await message.err(
+                "Add <code>FBAN_LOG_CHANNEL</code> to use reason flags..."
+            )
+            return
+        channel_ = await userge.get_chat(int(FBAN_LOG_CHANNEL))
+        if channel_.username is None:
+            await message.err(
+                "<b>Proof</b> channel can't private channel for <b>reason</b> flags..."
+            )
+            return
     user = message.reply_to_message.from_user.id
     input = message.filtered_input_str
     reason = input
@@ -323,6 +335,7 @@ async def fban_p(message: Message):
                 resp = response.text
                 if not (
                     ("New FedBan" in resp)
+                    or ("FedBan Reason update" in resp)
                     or ("starting a federation ban" in resp)
                     or ("start a federation ban" in resp)
                 ):
