@@ -87,7 +87,7 @@ async def neo_image():
         y += 13
     new_pic = BytesIO()
     photo = photo.resize(photo.size, Image.ANTIALIAS)
-    if me.id in kakashi:
+    if me.id in HyperTeamXGang:
         photo.save(new_pic, format="PNG")
         new_pic.name = "NeoFetch.png"
     else:
