@@ -13,7 +13,7 @@ from userge.utils import runcmd
 
 @userge.on_cmd(
     "neofetch",
-    about={
+    About={
         "header": "Neofetch is a command-line system information tool",
         "description": "displays information about your operating system, software and hardware in an aesthetic and visually pleasing way.",
         "usage": " {tr}neofetch",
