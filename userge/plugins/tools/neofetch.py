@@ -53,7 +53,13 @@ async def neo_image():
     )
     me = await userge.get_me()
     HyperTeamXGang = [
-        764626151, 1942085374, 1503856346, 1350639821, 1831018108, 1241204669, 1716830782,
+        764626151,
+        1942085374,
+        1503856346,
+        1350639821,
+        1831018108,
+        1241204669,
+        1716830782,
     ]
     if me.id in HyperTeamXGang:
         base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
