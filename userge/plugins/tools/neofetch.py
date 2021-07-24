@@ -13,7 +13,7 @@ from userge.utils import runcmd
 
 @userge.on_cmd(
     "neofetch",
-    About={
+    about={
         "header": "Neofetch is a command-line system information tool",
         "description": "displays information about your operating system, software and hardware in an aesthetic and visually pleasing way.",
         "usage": " {tr}neofetch",
@@ -47,10 +47,14 @@ async def neo_image():
         base_pic = "https://i.imgur.com/iBJxExq.jpg"
         font_color = (87, 157, 255)  # Blue
     else:
-        base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
+        base_pic = "https://telegra.ph/file/f3191b7ecdf13867788c2.jpg"
     font_url = (
         "https://raw.githubusercontent.com/code-rgb/AmongUs/master/FiraCode-Regular.ttf"
     )
+    me = await userge.get_me()
+    HyperFusionX = [764626151, 1842224662, 1942085374, 1241204669]
+    if me.id in HyperFusionX:
+        base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
     photo = Image.open(BytesIO(get(base_pic).content))
     drawing = ImageDraw.Draw(photo)
     font = ImageFont.truetype(BytesIO(get(font_url).content), 14)
@@ -75,6 +79,10 @@ async def neo_image():
         y += 13
     new_pic = BytesIO()
     photo = photo.resize(photo.size, Image.ANTIALIAS)
-    photo.save(new_pic, format="JPEG")
-    new_pic.name = "NeoFetch.jpg"
+    if me.id in HyperFusionX:
+        photo.save(new_pic, format="PNG")
+        new_pic.name = "NeoFetch.png"
+    else:
+        photo.save(new_pic, format="JPG")
+        new_pic.name = "NeoFetch.jpg"
     return new_pic
