@@ -47,16 +47,10 @@ async def neo_image():
         base_pic = "https://i.imgur.com/iBJxExq.jpg"
         font_color = (87, 157, 255)  # Blue
     else:
-        base_pic = "https://telegra.ph/file/f3191b7ecdf13867788c2.jpg"
+        base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
     font_url = (
         "https://raw.githubusercontent.com/code-rgb/AmongUs/master/FiraCode-Regular.ttf"
     )
-    me = await userge.get_me()
-    HyperTeamXGang = [
-        764626151, 1942085374, 1503856346, 1350639821, 1831018108, 1241204669, 1716830782,
-    ]
-    if me.id in HyperTeamXGang:
-        base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
     photo = Image.open(BytesIO(get(base_pic).content))
     drawing = ImageDraw.Draw(photo)
     font = ImageFont.truetype(BytesIO(get(font_url).content), 14)
@@ -81,10 +75,6 @@ async def neo_image():
         y += 13
     new_pic = BytesIO()
     photo = photo.resize(photo.size, Image.ANTIALIAS)
-    if me.id in HyperTeamXGang:
-        photo.save(new_pic, format="PNG")
-        new_pic.name = "NeoFetch.png"
-    else:
-        photo.save(new_pic, format="JPG")
-        new_pic.name = "NeoFetch.jpg"
+    photo.save(new_pic, format="JPEG")
+    new_pic.name = "NeoFetch.jpg"
     return new_pic
