@@ -1,6 +1,7 @@
 # made for USERGE-X by @Kakashi_HTK(tg)/@ashwinstr(gh)
 # v3.0.5
 
+
 from pyrogram import filters
 
 from userge import Config, Message, userge
@@ -54,7 +55,6 @@ async def deezing_(message: Message):
         await message.err(
             "Something unexpected happend, please try again later...", del_in=5
         )
-        return
 
 
 @userge.on_cmd(
@@ -107,37 +107,44 @@ async def dlist_(message: Message):
     )
     await message.edit(out_)
     me_ = await userge.get_me()
-    async with userge.conversation(message.chat.id) as conv:
-        response = await conv.get_response(
-            mark_read=True, filters=(filters.user(me_.id))
-        )
-        resp = response.text
-        try:
-            reply_ = int(resp)
-        except BaseException:
-            await conv.send_message(
-                f"The response {resp} is not a number, please try again..."
+    try:
+        async with userge.conversation(message.chat.id, timeout=15) as conv:
+            response = await conv.get_response(
+                mark_read=True, filters=(filters.user(me_.id))
             )
-            return
-        try:
-            result_id = result.results[reply_].id
-        except BaseException:
-            await conv.send_message(
-                "Out of index error...", reply_to_message_id=response.message_id
-            )
-            return
-        await response.delete()
+            resp = response.text
+            try:
+                reply_ = int(resp)
+            except BaseException:
+                await conv.send_message(
+                    f"The response {resp} is not a number, please try again..."
+                )
+                return
+            try:
+                result_id = result.results[reply_].id
+            except BaseException:
+                await conv.send_message(
+                    "Out of index error...", reply_to_message_id=response.message_id
+                )
+                return
+            await response.delete()
+    except BaseException:
+        out_ += "\n\n### <b>Response time expired.</b> ###"
+        await message.edit(out_)
+        return
     try:
         log_send = await userge.send_inline_bot_result(
             chat_id=Config.LOG_CHANNEL_ID,
             query_id=result.query_id,
             result_id=result_id,
         )
-        userge.copy_message(
+        await userge.copy_message(
             chat_id=message.chat.id,
             from_chat_id=Config.LOG_CHANNEL_ID,
             message_id=log_send.updates[0].id,
         )
+        out_ += f"\n\n### <b>Response {reply_} replied.</b> ###"
+        await message.edit(out_)
     except BaseException:
         await message.err(
             "Something unexpected happend, please try again later...", del_in=5
