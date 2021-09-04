@@ -52,8 +52,8 @@ async def neo_image():
         "https://raw.githubusercontent.com/code-rgb/AmongUs/master/FiraCode-Regular.ttf"
     )
     me = await userge.get_me()
-    HyperFusionX = [764626151, 1842224662, 1942085374, 1241204669]
-    if me.id in HyperFusionX:
+    kakashi = [1156425647, 1013414037]
+    if me.id in kakashi:
         base_pic = "https://telegra.ph/file/6cdadf4baddb83abfbed9.png"
     photo = Image.open(BytesIO(get(base_pic).content))
     drawing = ImageDraw.Draw(photo)
@@ -79,7 +79,7 @@ async def neo_image():
         y += 13
     new_pic = BytesIO()
     photo = photo.resize(photo.size, Image.ANTIALIAS)
-    if me.id in HyperFusionX:
+    if me.id in kakashi:
         photo.save(new_pic, format="PNG")
         new_pic.name = "NeoFetch.png"
     else:
