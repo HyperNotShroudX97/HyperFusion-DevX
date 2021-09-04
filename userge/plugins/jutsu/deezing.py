@@ -1,6 +1,7 @@
 # made for USERGE-X by @Kakashi_HTK(tg)/@ashwinstr(gh)
 # v3.0.5
 
+from asyncio import gather
 
 from pyrogram import filters
 
@@ -61,7 +62,8 @@ async def deezing_(message: Message):
     "dzlist",
     about={
         "header": "deezer music list",
-        "description": "get music list from deezer",
+        "description": "get music list from deezer"
+        "\nSudo users use dz after getting the list",
         "usage": "{tr}dzlist [query]",
     },
 )
@@ -89,8 +91,9 @@ async def dlist_(message: Message):
             dure_ = result.results[one].document.attributes[0].duration
             min_ = dure_ / 60
             sec_ = (min_ - int(min_)) * 60
+            min_ = f"{int(min_):02}"
             sec_ = f"{int(sec_):02}"
-            list_.append(f"• [<b>{one}</b>] {title_} <b>({int(min_)}:{int(sec_)})</b>")
+            list_.append(f"• [<b>{one}</b>] {title_} <b>({min_}:{sec_})</b>")
             total_ += 1
         except BaseException:
             break
@@ -117,7 +120,7 @@ async def dlist_(message: Message):
                 reply_ = int(resp)
             except BaseException:
                 await conv.send_message(
-                    f"The response {resp} is not a number, please try again..."
+                    f"The response <b>{resp}</b> is not a number, please try again..."
                 )
                 return
             try:
@@ -143,7 +146,7 @@ async def dlist_(message: Message):
             from_chat_id=Config.LOG_CHANNEL_ID,
             message_id=log_send.updates[0].id,
         )
-        out_ += f"\n\n### <b>Response {reply_} replied.</b> ###"
+        out_ += f"\n\n### <b>Responded with {reply_}.</b> ###"
         await message.edit(out_)
     except BaseException:
         await message.err(
