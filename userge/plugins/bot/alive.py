@@ -230,7 +230,7 @@ class Bot_Alive:
     def alive_info(me):
         u_name = " ".join([me.first_name, me.last_name or ""])
         alive_info = f"""
-­<a href="https://t.me/HyperTeamCloud"><b>𝑯𝒚𝒑𝒆𝒓𝑭𝒖𝒔𝒊𝒐𝒏𝑿</a> Is On & Fuckin Analysing!.</b>
+­<a href="https://t.me/HyperTerminatorX"><b>𝑯𝒚𝒑𝒆𝒓𝑭𝒖𝒔𝒊𝒐𝒏𝑿</a> Is On & Fuckin Analysing!.</b>
 
   🐍   <b>Peruthon      :</b>    <code>v{versions.__python_version__}</code>
   🔥   <b>Perugram.     :</b>    <code>v{versions.__pyro_version__}</code>
