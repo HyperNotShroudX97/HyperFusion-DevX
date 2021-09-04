@@ -51,8 +51,8 @@ RUN pip install -U setuptools wheel && \
 COPY . .
 
 # adding email and username to the bot
-RUN git config --global user.email "hypernotshroudx97@gmail.com"
-RUN git config --global user.name "HyperNotShroudX97"
+RUN git config --global user.email "skyebeatzx97@gmail.com"
+RUN git config --global user.name "NotShroudX97"
 
 # command to run on container start
 CMD [ "bash", "./run" ]
