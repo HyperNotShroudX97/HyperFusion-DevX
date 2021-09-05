@@ -467,7 +467,7 @@ async def unmute_usr(message: Message):
     allow_private=False,
 )
 async def zombie_clean(message: Message):
-    """remove deleted accounts from tg group"""
+    """Remove Deleted Fucking Accounts From HyperGramX Group"""
     chat_id = message.chat.id
     flags = message.flags
     rm_delaccs = "-c" in flags
