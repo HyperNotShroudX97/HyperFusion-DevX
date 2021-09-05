@@ -1,4 +1,4 @@
-""" setup AFK mode """
+""" Setup AFK Mode """
 
 import asyncio
 import time
@@ -32,22 +32,22 @@ async def _init() -> None:
 @userge.on_cmd(
     "afk",
     about={
-        "header": "Set to AFK mode",
-        "description": "Sets your status as AFK. Responds to anyone who tags/PM's.\n"
-        "you telling you are AFK. Switches off AFK when you type back anything.",
-        "usage": "{tr}afk or {tr}afk [reason]",
+        "Header": "Set To AFK Mode",
+        "Description": "Sets Your Status As Fuckin AFK. Responds To Anyone Who Fucking Tags/PM's.\n"
+        "You Telling You Are Fuckin AFK. Switches Off AFK When You Fuckin Type Back Anything.",
+        "Usage": "{tr}afk Or {tr}afk [Reason]",
     },
     allow_channels=False,
 )
 async def active_afk(message: Message) -> None:
-    """turn on or off afk mode"""
+    """Turn On Or Off The Fuckin AFK Mode"""
     global REASON, IS_AFK, TIME  # pylint: disable=global-statement
     IS_AFK = True
     TIME = time.time()
     REASON = message.input_str
     await asyncio.gather(
-        CHANNEL.log(f"You went AFK! : `{REASON}`"),
-        message.edit("`You went AFK!`", del_in=1),
+        CHANNEL.log(f"You Fuckin Went AFK! : `{REASON}`"),
+        message.edit("`You Fuckin Went AFK!`", del_in=1),
         AFK_COLLECTION.drop(),
         SAVED_SETTINGS.update_one(
             {"_id": "AFK"},
@@ -77,7 +77,7 @@ async def active_afk(message: Message) -> None:
     allow_via_bot=False,
 )
 async def handle_afk_incomming(message: Message) -> None:
-    """handle incomming messages when you afk"""
+    """Handle Incomming Messages When You Fuckin AFK!"""
     if not message.from_user:
         return
     user_id = message.from_user.id
@@ -89,8 +89,8 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             if REASON:
                 out_str = (
-                    f"I'm still **AFK**.\nReason: <code>{REASON}</code>\n"
-                    f"Last Seen: `{afk_time} ago`"
+                    f"I'm Still Fuckin **AFK**.\nReason: <code>{REASON}</code>\n"
+                    f"Last Fuckin Seen: `{afk_time} Ago`"
                 )
             else:
                 out_str = choice(AFK_REASONS)
@@ -102,8 +102,8 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         if REASON:
             out_str = (
-                f"I'm **AFK** right now.\nReason: <code>{REASON}</code>\n"
-                f"Last Seen: `{afk_time} ago`"
+                f"I'm Fucking **AFK** Right Now.\nReason: <code>{REASON}</code>\n"
+                f"Last Fuckin Seen: `{afk_time} Ago`"
             )
         else:
             out_str = choice(AFK_REASONS)
@@ -115,16 +115,17 @@ async def handle_afk_incomming(message: Message) -> None:
     if chat.type == "private":
         coro_list.append(
             CHANNEL.log(
-                f"#PRIVATE\n{user_dict['mention']} send you\n\n" f"{message.text}"
+                f"#PRIVATE\n{user_dict['mention']} Fuckin Send You\n\n"
+                f"{message.text}"
             )
         )
     else:
         coro_list.append(
             CHANNEL.log(
                 "#GROUP\n"
-                f"{user_dict['mention']} tagged you in [{chat.title}](http://t.me/{chat.username})\n\n"
+                f"{user_dict['mention']} Fuckin Tagged You In Fuckin [{chat.title}](http://t.me/{chat.username})\n\n"
                 f"{message.text}\n\n"
-                f"[goto_msg](https://t.me/c/{str(chat.id)[4:]}/{message.message_id})"
+                f"[Goto_Msg](https://t.me/c/{str(chat.id)[4:]}/{message.message_id})"
             )
         )
     coro_list.append(
@@ -145,11 +146,11 @@ async def handle_afk_incomming(message: Message) -> None:
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
 async def handle_afk_outgoing(message: Message) -> None:
-    """handle outgoing messages when you afk"""
+    """Handle Outgoing Messages When You Fuckin AFK!"""
     global IS_AFK  # pylint: disable=global-statement
     IS_AFK = False
     afk_time = time_formatter(round(time.time() - TIME))
-    replied: Message = await message.reply("`I'm no longer AFK!`", log=__name__)
+    replied: Message = await message.reply("`I'm No Fuckin Longer AFK!`", log=__name__)
     coro_list = []
     if USERS:
         p_msg = ""
@@ -165,14 +166,14 @@ async def handle_afk_outgoing(message: Message) -> None:
                 g_count += gcount
         coro_list.append(
             replied.edit(
-                f"`You recieved {p_count + g_count} messages while you were away. "
-                f"Check log for more details.`\n\n**AFK time** : __{afk_time}__",
+                f"`You Recieved Fuckin {p_count + g_count} Messages While You Were Fuckin Away. "
+                f"Check Log For More Fucking Details.`\n\n**AFK Time** : __{afk_time}__",
                 del_in=3,
             )
         )
         out_str = (
-            f"You've recieved **{p_count + g_count}** messages "
-            + f"from **{len(USERS)}** users while you were away!\n\n**AFK time** : __{afk_time}__\n"
+            f"You've Recieved Fuckin **{p_count + g_count}** Messages "
+            + f"From **{len(USERS)}** User's While You Were Fuckin Away!\n\n**AFK Time** : __{afk_time}__\n"
         )
         if p_count:
             out_str += f"\n**{p_count} Private Messages:**\n\n{p_msg}"
@@ -195,32 +196,32 @@ async def handle_afk_outgoing(message: Message) -> None:
 
 
 AFK_REASONS = (
-    "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
-    "I'm away right now. If you need anything, leave a message after the beep: \
-`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep!`",
-    "You missed me, next time aim better.",
-    "I'll be back in a few minutes and if I'm not...,\nwait longer.",
-    "I'm not here right now, so I'm probably somewhere else.",
-    "Roses are red,\nViolets are blue,\nLeave me a message,\nAnd I'll get back to you.",
-    "Sometimes the best things in life are worth waiting for…\nI'll be right back.",
-    "I'll be right back,\nbut if I'm not right back,\nI'll be back later.",
-    "If you haven't figured it out already,\nI'm not here.",
-    "I'm away over 7 seas and 7 countries,\n7 waters and 7 continents,\n7 mountains and 7 hills,\
-7 plains and 7 mounds,\n7 pools and 7 lakes,\n7 springs and 7 meadows,\
-7 cities and 7 neighborhoods,\n7 blocks and 7 houses...\
-    Where not even your messages can reach me!",
-    "I'm away from the keyboard at the moment, but if you'll scream loud enough at your screen,\
-    I might just hear you.",
-    "I went that way\n>>>>>",
-    "I went this way\n<<<<<",
-    "Please leave a message and make me feel even more important than I already am.",
-    "If I were here,\nI'd tell you where I am.\n\nBut I'm not,\nso ask me when I return...",
-    "I am away!\nI don't know when I'll be back!\nHopefully a few minutes from now!",
-    "I'm not available right now so please leave your name, number, \
-    and address and I will stalk you later. :P",
-    "Sorry, I'm not here right now.\nFeel free to talk to my userbot as long as you like.\
-I'll get back to you later.",
-    "I bet you were expecting an away message!",
-    "Life is so short, there are so many things to do...\nI'm away doing one of them..",
-    "I am not here right now...\nbut if I was...\n\nwouldn't that be awesome?",
+    "I'm Fuckin Busy Right Now. Please Talk In A Fuckin Bag And When I Come Back You Can Just Fuckin Give Me The Bag!",
+    "I'm Away Right Now. If You Fuckin Need Anything, leave Me A Fuckin Message After The Fucking BEEP!: \
+`BeeeeeFuckeeeeeeFuckeeeeeFuckeeeFuckeeeeeeeFuckeeeeeeep!`",
+    "You Missed Me, Next Time Aim Better!.",
+    "I'll Be Back In A Few Fuckin 696969Hrs & If I'M Not...,\nWait Fucking Longer Unill You Die!.",
+    "I'm Not Here Fucking Right Now, So I'm Probably Somewhere Fuckin Else In Other Universe Or Dimensions Or Maibi In Matrix Hell!.",
+    "Roses Are Red,\nViolets Are Blue,\nLeave Me A Message,\nAnd I'll Fuck Back To You.",
+    "Sometimes The Best Fuckin Things In Life Are Worth Waiting For…\nI'll Be Fuckin Right Back.",
+    "I'll Be Fuckin Right Back,\nBut If I'm Not Fuckin Right Back,\nI'll Be Back After 696969Hrs Or Yrs Later Maibi Depends xD!.",
+    "If You Haven't Figured It Out Already,\nI'm Not Fucking Here.",
+    "I'm Fucking Away Over 7 Seas & 7 Countries,\n7 Waters & 7 Continents,\n7 Mountains & 7 Hills,\
+7 Plains & 7 Mounds,\n7 Pools & 7 Lakes,\n7 Springs & 7 Meadows,\
+7 Cities & 7 Neighborhoods,\n7 Blocks & 7 Houses...\
+    Where Not Even Your Fuckin Messages Can Reach Me!",
+    "I'm Fucking Away From The Fucking Keyboard At The Fucking Moment, But If You'll Fuckin Scream Loud Enough At Your Fuckin Screen,\
+    I Might Just Fuckin Hear You Maibi!.",
+    "I Went That Fuckin Way!,\n>>>>>",
+    "I Went This Fuckin Way!,\n<<<<<",
+    "Please Leave A Fuckin Message And Make Me Feel Even More Important Than I Already Am.",
+    "If I Were Fuckin Here,\nI'd Tell You Where The Fuck I Am!.\n\nBut I'm Not,\nSoo Ask Me When I Fuckin Return!...",
+    "I'm Fuckin Away!\nI Don't Fuckin Know When I'll Be Fuckin Back!\nHopefully A Few 696969Hrs/Yrs From Now!!",
+    "I'm Not Fuckin Available Right Now Soo Please Leave Your Fuckin Name, & Fuckin Number, \
+    & Fuckin Address & I Will Fuckin Stalk You Untill You Fuckin Die!. :P",
+    "Sorry, I'm Not Here Fuckin Right Now.\nFeel Free To Talk To My @HyperUsergeX_Bot As Long As You Fucking Like.\
+I'll Get Fuckin Back To You Later.",
+    "I Bet You Were Fuckin Expecting An Away Auto-Message Huh! ^You Kiddo Beru Die^!",
+    "Life Is So Fuckin Short, There Are So Many Fuckin Things To Do...\nI'm Away Doing One Oof Them..",
+    "I Am Not Here Fuckin Right Now...\nBut If I Was...\n\nWouldn't That Be Fucking Awesome?",
 )
