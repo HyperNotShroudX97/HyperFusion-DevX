@@ -257,8 +257,8 @@ class Bot_Alive:
             [
                 InlineKeyboardButton(text="✖️  HyperMTKGang!", url="t.me/HyperMTKGang"),
                 InlineKeyboardButton(text="⚡  REPO!", url=Config.UPSTREAM_REPO),
-            ],
-        ]
+                InlineKeyboardButton(text="☣️  Updates!", url="t.me/UsergeXForkUpdates"),
+                InlineKeyboardButton(text="☢️  Support!", url="t.me/UsergeXForkTeam"),      ]
         return InlineKeyboardMarkup(buttons)
 
     @staticmethod
@@ -269,6 +269,7 @@ class Bot_Alive:
             "https://telegra.ph/file/6ecab390e4974c74c3764.png",
             "https://telegra.ph/file/995c75983a6c0e4499b55.png",
             "https://telegra.ph/file/86cc25c78ad667ca5e691.png",
+            "https://telegra.ph/file/3565dad9f5dc7f1359fa0.mp4",
         ]
         return rand_array(alive_imgs)
 
