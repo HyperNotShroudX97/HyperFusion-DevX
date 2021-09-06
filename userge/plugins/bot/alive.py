@@ -257,8 +257,12 @@ class Bot_Alive:
             [
                 InlineKeyboardButton(text="✖️  HyperMTKGang!", url="t.me/HyperMTKGang"),
                 InlineKeyboardButton(text="⚡  REPO!", url=Config.UPSTREAM_REPO),
+            ],
+            [
                 InlineKeyboardButton(text="☣️  Updates!", url="t.me/UsergeXForkUpdates"),
-                InlineKeyboardButton(text="☢️  Support!", url="t.me/UsergeXForkTeam"),      ]
+                InlineKeyboardButton(text="☢️  Support!", url="t.me/UsergeXForkTeam"),
+            ],
+       ]
         return InlineKeyboardMarkup(buttons)
 
     @staticmethod
