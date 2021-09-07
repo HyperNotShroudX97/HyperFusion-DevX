@@ -259,10 +259,12 @@ class Bot_Alive:
                 InlineKeyboardButton(text="⚡  REPO!", url=Config.UPSTREAM_REPO),
             ],
             [
-                InlineKeyboardButton(text="☣️  Updates!", url="t.me/UsergeXForkUpdates"),
+                InlineKeyboardButton(
+                    text="☣️  Updates!", url="t.me/UsergeXForkUpdates"
+                ),
                 InlineKeyboardButton(text="☢️  Support!", url="t.me/UsergeXForkTeam"),
             ],
-       ]
+        ]
         return InlineKeyboardMarkup(buttons)
 
     @staticmethod
