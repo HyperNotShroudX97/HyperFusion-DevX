@@ -1,4 +1,4 @@
-﻿"""Fun plugin"""
+﻿"""Fun Plugin"""
 
 import asyncio
 from datetime import datetime
@@ -94,7 +94,7 @@ async def send_alive_message(message: Message) -> None:
         reply_markup = None
         file_id = _USER_CACHED_MEDIA
         caption += (
-            f"\n⚡️  <a href={Config.UPSTREAM_REPO}><b>REPO</b></a>"
+            f"\n⚡️  <a href={Config.UPSTEAM_REPO}><b>REPO</b></a>"
             "    <code>|</code>    "
             "👥  <a href='https://t.me/useless_x'><b>SUPPORT</b></a>"
         )
@@ -230,12 +230,12 @@ class Bot_Alive:
     def alive_info(me):
         u_name = " ".join([me.first_name, me.last_name or ""])
         alive_info = f"""
-­<a href="https://t.me/xplugin"><b>𝐒𝐇𝐀𝐑𝐈𝐍𝐆𝐀𝐍</a> is on and analysing.</b>
+­<a href="https://t.me/HyperTerminatorX"><b>𝑯𝒚𝒑𝒆𝒓𝑭𝒖𝒔𝒊𝒐𝒏𝑿</a> Is On & Fuckin Analysing!.</b>
 
-  🐍   <b>Python      :</b>    <code>v{versions.__python_version__}</code>
-  🔥   <b>Pyrogram :</b>    <code>v{versions.__pyro_version__}</code>
-  🧬   <b>𝑿                :</b>    <code>v{get_version()}</code>
-  👤   <b>User          :</b>    <code>{u_name}</code>
+  🐍   <b>Peruthon      :</b>    <code>v{versions.__python_version__}</code>
+  🔥   <b>Perugram.     :</b>    <code>v{versions.__pyro_version__}</code>
+  🧬   <b>Hyper-𝑿      :</b>    <code>v{get_version()}</code>
+  👤   <b>HyperFUser    :</b>    <code>{u_name}</code>
   <b>{Bot_Alive._get_mode()}</b>        <code>|</code>    🕔  <b>{userge.uptime}</b>
 """
         return alive_info
@@ -243,20 +243,26 @@ class Bot_Alive:
     @staticmethod
     def _get_mode() -> str:
         if RawClient.DUAL_MODE:
-            return "↕️   DUAL"
+            return "↕️   HyperDual"
         if Config.BOT_TOKEN:
-            return "🤖  BOT"
-        return "👤  USER"
+            return "🤖  PeruBot"
+        return "👤  PeruUser"
 
     @staticmethod
     def alive_buttons() -> InlineKeyboardMarkup:
         buttons = [
             [
-                InlineKeyboardButton(text="🔧  SETTINGS", callback_data="settings_btn"),
+                InlineKeyboardButton(text="🔧  SETTINGS!", callback_data="settings_btn"),
             ],
             [
-                InlineKeyboardButton(text="✖️  XPLUGINS", url="t.me/xplugin_support"),
-                InlineKeyboardButton(text="⚡  REPO", url=Config.UPSTREAM_REPO),
+                InlineKeyboardButton(text="✖️  HyperMTKGang!", url="t.me/HyperMTKGang"),
+                InlineKeyboardButton(text="⚡  REPO!", url=Config.UPSTREAM_REPO),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="☣️  Updates!", url="t.me/UsergeXForkUpdates"
+                ),
+                InlineKeyboardButton(text="☢️  Support!", url="t.me/UsergeXForkTeam"),
             ],
         ]
         return InlineKeyboardMarkup(buttons)
@@ -269,6 +275,7 @@ class Bot_Alive:
             "https://telegra.ph/file/6ecab390e4974c74c3764.png",
             "https://telegra.ph/file/995c75983a6c0e4499b55.png",
             "https://telegra.ph/file/86cc25c78ad667ca5e691.png",
+            "https://telegra.ph/file/3565dad9f5dc7f1359fa0.mp4",
         ]
         return rand_array(alive_imgs)
 
