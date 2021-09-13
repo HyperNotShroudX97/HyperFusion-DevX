@@ -24,7 +24,7 @@ async def _init():
         "header": "Check Updates or Update USERGE-X",
         "flags": {
             "-pull": "pull updates",
-            "-branch": "Default is -alpha",
+            "-branch": "Default Is -Alpha",
             "-pr": "Userge-Plugins repo updates",
             "-prp": "Userge-Plugins repo pull updates",
         },
@@ -50,7 +50,7 @@ async def check_update(message: Message):
     flags = list(message.flags)
     pull_from_repo = False
     push_to_heroku = False
-    branch = "alpha"
+    branch = "Alpha"
     u_repo = Config.UPSTREAM_REPO
     u_repo = u_repo.replace("/", " ")
     git_u_n = u_repo.split()[2]
