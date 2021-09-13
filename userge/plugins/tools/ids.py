@@ -12,7 +12,7 @@ from userge import Message, userge
 @userge.on_cmd(
     "ids",
     about={
-        "header": "display ids",
+        "header": "Display ID's",
         "usage": "reply {tr}ids any message, file or just send this command",
     },
 )
