@@ -24,7 +24,7 @@ async def _init():
         "header": "Check Updates or Update USERGE-X",
         "flags": {
             "-pull": "pull updates",
-            "-branch": "Default Is -HyperTestingXD,
+            "-branch": "Default Is -HyperTestingXD",
             "-pr": "Userge-Plugins repo updates",
             "-prp": "Userge-Plugins repo pull updates",
         },
