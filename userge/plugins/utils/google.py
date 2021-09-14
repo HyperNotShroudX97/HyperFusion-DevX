@@ -50,7 +50,7 @@ async def gsearch(message: Message):
             output += f"`{desc}`\n\n"
         except IndexError:
             break
-    output = f"**Google Fucking Search:**\n`{query}`\n\n**Fucking Results:**\n{output}"
+    output = f"**Google Search:**\n`{query}`\n\n**Results:**\n{output}"
     await message.edit_or_send_as_file(
         text=output, caption=query, disable_web_page_preview=True
     )
