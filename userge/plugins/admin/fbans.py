@@ -14,8 +14,7 @@ from pyrogram import filters
 from pyrogram.errors import FloodWait, PeerIdInvalid, UserBannedInChannel
 
 from userge import Config, Message, get_collection, userge
-
-from ..jutsu.report import report_user
+from userge.utils import report_user
 
 FBAN_LOG_CHANNEL = os.environ.get("FBAN_LOG_CHANNEL")
 
@@ -286,7 +285,7 @@ async def fban_p(message: Message):
     reply = message.reply_to_message
     proof = reply.message_id
     log_fwd = await userge.forward_messages(
-        int(PROOF_CHANNEL),
+        int(FBAN_LOG_CHANNEL),
         from_chat_id=from_,
         message_ids=proof,
     )
@@ -354,7 +353,9 @@ async def fban_p(message: Message):
         + f"\n**ID:** <code>{u_id}</code>\n**Reason:** {reason}\n**Status:** {status}"
     )
     await message.edit(msg_, disable_web_page_preview=True)
-    await userge.send_message(PROOF_CHANNEL, msg_, disable_web_page_preview=True)
+    await userge.send_message(
+        int(FBAN_LOG_CHANNEL), msg_, disable_web_page_preview=True
+    )
 
 
 @userge.on_cmd(
