@@ -104,16 +104,24 @@ async def denyToPm(message: Message):
     """disallows to pm"""
     if "-all" in message.flags:
         await message.edit("`Disallowing all PMs...`")
-        for one in Config.ALLOWED_CHATS:
+        one = 0
+        while True:
             try:
-                Config.ALLOWED_CHATS.remove(one)
-                await ALLOWED_COLLECTION.delete_one({"_id": one})
+                usr = list(Config.ALLOWED_CHATS)[one]
+                one += 1
+            except BaseException:
+                break
+            try:
+                Config.ALLOWED_CHATS.remove(usr)
+                await ALLOWED_COLLECTION.delete_one({"_id": usr})
             except BaseException:
                 pass
         if not Config.ALLOWED_CHATS:
             await message.edit("`Disallowed all PMs.`", del_in=5)
         else:
-            await message.edit("`Something went wrong...`", del_in=5)
+            await message.edit(
+                "`Something went wrong, not all PMs disallowed...`", del_in=5
+            )
         return
     userid = await get_id(message)
     if userid:
