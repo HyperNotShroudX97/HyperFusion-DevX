@@ -79,22 +79,22 @@ async def lyrics(message: Message):
         await message.edit(f"Couldn't find `{title}` on Genius...")
         return
     lyric = lyr.lyrics
-    lyrics = f"\n{lyric}"
-    lyrics += f"\n<b>Source:</b> <code>genius.com</code>"
+    lyrics = f"\n{lyric}</i>"
+    lyrics += f"\n\n<b>Source:</b> <code>genius.com</code>"
     lyrics = (
-        lyrics.replace("[", "<b>[")
-        .replace("]", "]</b>")
+        lyrics.replace("[", "</i><b>[")
+        .replace("]", "]</b><i>")
         .replace("EmbedShare", "")
         .replace("URLCopyEmbedCopy", "")
     )
-    lyr_msg = f"Lyrics for <b>{title}</b>...\n\n{lyrics}"
+    lyr_msg = f"Lyrics for <b>{title}</b>...\n\n<i>{lyrics}"
     if len(lyr_msg) <= 4096 and "-t" not in flag and "-pre" not in flag:
         await message.edit(f"{lyr_msg}")
     else:
         if "-no_p" in flag:
             dis_pre = True
         lyrics = lyrics.replace("\n", "<br>")
-        link = post_to_telegraph(f"Lyrics for {title}...", lyrics)
+        link = post_to_telegraph(f"Lyrics for {title}...", f"<i>{lyrics}")
         await message.edit(
             f"Lyrics for [<b>{title}</b>]({link}) by genius.com...",
             disable_web_page_preview=dis_pre,
