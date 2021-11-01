@@ -140,7 +140,10 @@ async def list_tag(message: Message):
                 title = f"`{title}`"
             list += f"[{chat_n}] {title}:\n"
             for two in one["data"]:
-                list += f"• {two['mention']} - `{two['user_id']}`\n"
+                name_ = two["name"]
+                id_ = two["user_id"]
+                mention = f"[{name_}](tg://user?id={id_})"
+                list += f"• {mention} - `{id_}`\n"
             list += "\n"
         await message.edit(
             "`List of all users in tag list sent to log channel.`", del_in=5
@@ -174,9 +177,12 @@ async def tag_them(message: Message):
     chat_ = await userge.get_chat(chat_)
     list = ""
     found = await CHAT_TAG.find_one({"chat_id": chat_.id})
+    num = 0
     if found:
         for one in found["data"]:
-            list += f"• {one['mention']}\n"
+            mention = f"[{one['name']}](tg://user?id={one['user_id']})"
+            list += f"• {mention}\n"
+            num += 1
         await message.delete()
         await message.reply(list)
         await CHANNEL.log(f"Mentioned users in tag list in <b>{chat_.title}</b>...")
