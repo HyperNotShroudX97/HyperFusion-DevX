@@ -70,8 +70,8 @@ async def fun_(message: Message):
 async def Oof_(message: Message):
     """Oof"""
     Oof = "Oo "
-    for _ in range(6):
-        Oof = Oof[:-1] + "of"
+    for _ in range(10):
+        Oof = Oof[:-1] + "oFuck"
         await message.try_to_edit(Oof)
 
 
