@@ -1,4 +1,5 @@
-# made for USERGE-X by @Kakashi_HTK(tg)/@ashwinstr(gh)
+# plugin made for USERGE-X by @Kakashi_HTK(TG)/@ashwinstr(GH)
+# before porting please ask to Kakashi
 # v3.0.10
 
 from asyncio import gather
@@ -29,7 +30,7 @@ async def deezing_(message: Message):
     try:
         num = int(num)
     except BaseException:
-        await message.edit("Please enter a proper number after ';'...", del_in=5)
+        await message.edit("`Please enter a proper number after ';'...`", del_in=5)
         return
     bot_ = "deezermusicbot"
     song_ = capitaled(song_)
@@ -54,7 +55,7 @@ async def deezing_(message: Message):
         )
     except BaseException:
         await message.err(
-            "Something unexpected happend, please try again later...", del_in=5
+            "`Something unexpected happend.`\n<b>ERROR:</b> `{e}`", del_in=5
         )
 
 
@@ -72,7 +73,7 @@ async def dlist_(message: Message):
     bot_ = "deezermusicbot"
     query_ = message.input_str
     if not query_:
-        await message.err("Input not found...", del_in=5)
+        await message.err("`Input not found...`", del_in=5)
         return
     query_ = capitaled(query_)
     await message.edit(f"Searching for <b>{query_}</b>...")
@@ -93,7 +94,7 @@ async def dlist_(message: Message):
             sec_ = (min_ - int(min_)) * 60
             min_ = f"{int(min_):02}"
             sec_ = f"{int(sec_):02}"
-            list_.append(f"• [<b>{one}</b>] {title_} <b>({min_}:{sec_})</b>")
+            list_.append(f"• [<b>{one}</b>] `{title_}` <b>({min_}:{sec_})</b>")
             total_ += 1
         except BaseException:
             break
@@ -133,7 +134,7 @@ async def dlist_(message: Message):
                 for one in reply_:
                     result_id = result.results[int(one)].id
             except BaseException:
-                out_ += f"\n\n### Response/s <b>{reply_}</b> gave out of index error, <b>please retry</b>. ###"
+                out_ += f"\n\n### Response/s <b>{reply_}</b> gave out of index error, <b>please retry</b>. ###`"
                 await response.delete()
                 await message.edit(out_, del_in=15)
                 return
@@ -159,6 +160,6 @@ async def dlist_(message: Message):
         out_ += f"\n\n### <b>Responded with {reply_}.</b> ###"
         await message.edit(out_)
     except BaseException:
-        await message.err(
-            "Something unexpected happend, please try again later...", del_in=5
+        await message.edit(
+            "`Something unexpected happend.`\n<b>ERROR:</b> `{e}`", del_in=5
         )

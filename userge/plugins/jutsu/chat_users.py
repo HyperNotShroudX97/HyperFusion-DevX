@@ -1,6 +1,8 @@
-# created for USERGE-X by @Kakashi_HTK(tg)/@ashwinstr(github)
+# plugin made for USERGE-X by @Kakashi_HTK(TG)/@ashwinstr(GH)
+# before porting please ask to Kakashi
 
 from userge import Message, userge
+from userge.helpers import full_name
 
 
 @userge.on_cmd(
@@ -48,8 +50,8 @@ async def chat_users_(message: Message):
     lim = 0
     async for mem in userge.iter_chat_members(chat_):
         try:
-            await userge.get_users(mem.user.id)
-            user = " ".join([mem.user.first_name, mem.user.last_name or ""])
+            check = await userge.get_users(mem.user.id)
+            user = full_name(check)
         except BaseException:
             user = "<i>DELETED USER</i>"
         list_ += (

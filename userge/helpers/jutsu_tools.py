@@ -1,7 +1,5 @@
 # tools for jutsu plugins by @Kakashi_HTK(tg)/@ashwinstr(gh)
 
-
-import asyncio
 from typing import Union
 from pyrogram.errors import UserNotParticipant
 from pyrogram.raw.functions.account import ReportPeer
@@ -184,7 +182,6 @@ async def admin_chats(user_id: int) -> dict:
 
 
 async def get_response(msg, filter_user: Union[int, str] = 0, timeout: int = 5, mark_read: bool = False):
-    await asyncio.sleep(timeout)
     if filter_user:
         try:
             user_ = await userge.get_users(filter_user)
@@ -210,9 +207,34 @@ async def get_response(msg, filter_user: Union[int, str] = 0, timeout: int = 5, 
     raise "No response found in time limit."
 
 
+#async def get_response(msg, filter_user: Union[int, str] = 0, timeout: int = 5, mark_read: bool = False):
+#    try:
+#       _response = await asyncio.wait_for(response(msg, filter_user, mark_read), timeout=timeout)
+#    except:
+#        raise
+#    return _response
+
+
 def full_name(user: dict):
     try:
         f_name = " ".join([user.first_name, user.last_name or ""])
     except:
         raise
     return f_name
+
+
+def msg_type(message):
+    type_ = "text"
+    if message.audio:
+        type_ = "audio"
+    elif message.animation:
+        type_ = "gif"
+    elif message.document:
+        type_ = "file"
+    elif message.photo:
+        type_ = "photo"
+    elif message.sticker:
+        type_ = "sticker"
+    elif message.video:
+        type_ = "video"
+    return type_
